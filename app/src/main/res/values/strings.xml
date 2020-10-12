@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">My Player</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="album_art">Album Art</string>
+    <string name="go_to_previous_song">go to previous song</string>
+    <string name="stop_playing">stop playing</string>
+    <string name="pause_playing">pause playing</string>
+    <string name="start_playing">start playing</string>
+    <string name="play_next_song">play next song</string>
+</resources>
