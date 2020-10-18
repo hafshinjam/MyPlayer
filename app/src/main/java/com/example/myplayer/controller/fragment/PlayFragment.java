@@ -1,5 +1,10 @@
 package com.example.myplayer.controller.fragment;
 
+import android.content.ContentProvider;
+import android.content.ContentResolver;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
@@ -195,6 +200,15 @@ public class PlayFragment extends Fragment {
         mSongNameText.setText(mCurrentSong.getSongName());
         mArtistNameText.setText(mCurrentSong.getSongArtist());
         mAlbumNameText.setText(mCurrentSong.getSongAlbum());
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        mmr.setDataSource(mCurrentSong.getSongPath());
+        byte[] data = mmr.getEmbeddedPicture();
+        Bitmap bitmap;
+        if (data != null) {
+            bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+            mAlbumArts.setImageBitmap(bitmap);
+        } else
+            mAlbumArts.setImageDrawable(getResources().getDrawable(R.drawable.ic_album_art, null));
     }
 
     private void playCurrentSong() {
@@ -215,7 +229,7 @@ public class PlayFragment extends Fragment {
         mMusicSeeker.setProgress(mPlayer.getCurrentPosition() / 1000);
         int total = mPlayer.getDuration();
         mMusicSeeker.setMax(total / 1000);
-       final Handler mHandler = new Handler();
+        final Handler mHandler = new Handler();
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
