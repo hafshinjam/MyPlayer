@@ -22,6 +22,7 @@ public class MusicDBRepository {
     private ArrayList<Artist> mArtists;
     private ArrayList<Song> mPlaySong;
     private static MediaPlayer mediaPlayer;
+    private Song mCurrentSongToPlay;
 
     private static MusicDBRepository sMusicDBRepository;
 
@@ -61,6 +62,14 @@ public class MusicDBRepository {
                 .setUsage(AudioAttributes.USAGE_MEDIA).build());
     }
 
+    public Song getCurrentSongToPlay() {
+        return mCurrentSongToPlay;
+    }
+
+    public void setCurrentSongToPlay(Song currentSongToPlay) {
+        mCurrentSongToPlay = currentSongToPlay;
+    }
+
     public List<Song> getSongs() {
         return mSongs;
     }
@@ -94,8 +103,9 @@ public class MusicDBRepository {
         return mAlbums;
     }
 
-    public void setPlaySong() {
+    public void setPlaySong(Song song) {
         mPlaySong = mSongs;
+        setCurrentSongToPlay(song);
     }
 
     public void setPlaySong(Album album) {
@@ -104,6 +114,7 @@ public class MusicDBRepository {
             if (song.getSongAlbum().equals(album.getAlbumName()))
                 mPlaySong.add(song);
         }
+        setCurrentSongToPlay(mPlaySong.get(0));
     }
 
     public void setPlaySong(Artist artist) {
@@ -112,6 +123,7 @@ public class MusicDBRepository {
             if (song.getSongArtist().equals(artist.getName()))
                 mPlaySong.add(song);
         }
+        setCurrentSongToPlay(mPlaySong.get(0));
     }
 
     public ArrayList<Song> getPlaySong() {

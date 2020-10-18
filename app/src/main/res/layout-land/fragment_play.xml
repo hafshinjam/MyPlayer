@@ -14,7 +14,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/album_art"
-        app:layout_constraintEnd_toStartOf="@id/music_seeker"
+        app:layout_constraintEnd_toStartOf="@id/musicSeeker"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@tools:sample/avatars" />
@@ -56,7 +56,7 @@
         tools:text="Music Album" />
 
     <SeekBar
-        android:id="@+id/music_seeker"
+        android:id="@+id/musicSeeker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -80,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/repeatOneButton"
         app:layout_constraintStart_toEndOf="@+id/albumArt"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/repeatOneButton"
@@ -95,7 +95,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/shuffleButton"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/repeatAllButton"
@@ -110,7 +110,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/nextButton"
         app:layout_constraintStart_toEndOf="@+id/shuffleButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/shuffleButton"
@@ -125,7 +125,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/repeatAllButton"
         app:layout_constraintStart_toEndOf="@+id/repeatOneButton"
-        app:layout_constraintTop_toBottomOf="@id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/nextButton"
@@ -140,6 +140,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/repeatAllButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

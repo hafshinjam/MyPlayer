@@ -1,5 +1,6 @@
 package com.example.myplayer.controller.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplayer.R;
+import com.example.myplayer.controller.activity.PlayActivity;
 import com.example.myplayer.model.Artist;
 import com.example.myplayer.repository.MusicDBRepository;
 
@@ -76,12 +78,14 @@ public class ListOfArtistsFragment extends Fragment {
 
         public ArtistHolder(@NonNull View itemView) {
             super(itemView);
-            mArtistNameText = itemView.findViewById(R.id.albumRowName);
+            mArtistNameText = itemView.findViewById(R.id.artistRowName);
             //Todo set click listener to go to play fragment
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mRepository.setPlaySong(mArtist);
+                    Intent intent = PlayActivity.newIntent(getContext(),mRepository.getPlaySong().get(0));
+                    startActivity(intent);
                 }
             });
         }

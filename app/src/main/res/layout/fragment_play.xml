@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#6940FB"
-    tools:context=".controller.fragment.playFragment">
+    tools:context=".controller.fragment.PlayFragment">
 
     <ImageView
         android:id="@+id/albumArt"
@@ -17,7 +17,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="8dp"
         android:contentDescription="@string/album_art"
-        app:layout_constraintBottom_toTopOf="@id/music_seeker"
+        app:layout_constraintBottom_toTopOf="@id/musicSeeker"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -60,7 +60,7 @@
         tools:text="Music Album" />
 
     <SeekBar
-        android:id="@+id/music_seeker"
+        android:id="@+id/musicSeeker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -79,12 +79,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/silver"
         android:contentDescription="@string/go_to_previous_song"
         android:src="@drawable/ic_previous"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/repeatOneButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/repeatOneButton"
@@ -94,12 +95,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/silver"
         android:contentDescription="@string/stop_playing"
         android:src="@drawable/ic_repeat_one"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/shuffleButton"
         app:layout_constraintStart_toEndOf="@+id/previousButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/repeatAllButton"
@@ -109,12 +111,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/silver"
         android:contentDescription="@string/pause_playing"
-        android:src="@drawable/ic_pause"
+        android:src="@drawable/ic_repeat_all"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/nextButton"
         app:layout_constraintStart_toEndOf="@+id/shuffleButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/shuffleButton"
@@ -124,12 +127,13 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/silver"
         android:contentDescription="@string/start_playing"
         android:src="@drawable/ic_shuffle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/repeatAllButton"
         app:layout_constraintStart_toEndOf="@+id/repeatOneButton"
-        app:layout_constraintTop_toBottomOf="@id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@id/musicSeeker" />
 
     <ImageButton
         android:id="@+id/nextButton"
@@ -139,11 +143,12 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/silver"
         android:contentDescription="@string/play_next_song"
         android:src="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/repeatAllButton"
-        app:layout_constraintTop_toBottomOf="@+id/music_seeker" />
+        app:layout_constraintTop_toBottomOf="@+id/musicSeeker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

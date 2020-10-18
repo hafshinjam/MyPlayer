@@ -68,6 +68,14 @@ public class ListOfAlbumsFragment extends Fragment {
         private Album mAlbum;
         private TextView mAlbumNameText;
 
+        public Album getAlbum() {
+            return mAlbum;
+        }
+
+        public void setAlbum(Album album) {
+            mAlbum = album;
+        }
+
         public AlbumHolder(@NonNull View itemView) {
             super(itemView);
             mAlbumNameText = itemView.findViewById(R.id.albumRowName);
