@@ -16,7 +16,7 @@ import com.example.myplayer.model.Song;
 public class PlayActivity extends SingleFragmentActivity {
 
 
-    public static Intent newIntent(Context context, Song song) {
+    public static Intent newIntent(Context context) {
         return new Intent(context,PlayActivity.class);
     }
 

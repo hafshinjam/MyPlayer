@@ -84,7 +84,7 @@ public class ListOfArtistsFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     mRepository.setPlaySong(mArtist);
-                    Intent intent = PlayActivity.newIntent(getContext(),mRepository.getPlaySong().get(0));
+                    Intent intent = PlayActivity.newIntent(getContext());
                     startActivity(intent);
                 }
             });

@@ -1,7 +1,5 @@
 package com.example.myplayer.controller.fragment;
 
-import android.content.ContentProvider;
-import android.content.ContentResolver;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -32,7 +30,6 @@ import java.util.ArrayList;
  */
 public class PlayFragment extends Fragment {
 
-    private static final String FIRST_SONG_TO_PLAY = "FirstSongToPlay";
     private ImageView mAlbumArts;
     private TextView mSongNameText;
     private TextView mArtistNameText;

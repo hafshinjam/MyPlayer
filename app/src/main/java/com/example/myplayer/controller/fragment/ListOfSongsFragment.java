@@ -1,5 +1,6 @@
 package com.example.myplayer.controller.fragment;
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myplayer.R;
+import com.example.myplayer.controller.activity.PlayActivity;
 import com.example.myplayer.model.Song;
 import com.example.myplayer.repository.MusicDBRepository;
 
@@ -83,7 +85,9 @@ public class ListOfSongsFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    mMusicDBRepository.setPlaySong(mSong);
+                    Intent intent = PlayActivity.newIntent(getContext());
+                    startActivity(intent);
                 }
             });
         }
