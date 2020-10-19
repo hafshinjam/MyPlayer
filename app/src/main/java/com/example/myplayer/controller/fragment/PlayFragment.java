@@ -150,13 +150,11 @@ public class PlayFragment extends Fragment {
                     else
                         mPlayIndex++;
                     mCurrentSong = mSongs.get(mPlayIndex);
-                    setViews();
-                    playCurrentSong();
-                } else{
+                } else {
                     mCurrentSong = mSongs.get(GenerateRandomSongIndex());
-                    setViews();
-                    playCurrentSong();
                 }
+                setViews();
+                playCurrentSong();
             }
         });
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
@@ -168,19 +166,38 @@ public class PlayFragment extends Fragment {
                     else
                         mPlayIndex--;
                     mCurrentSong = mSongs.get(mPlayIndex);
-                    setViews();
-                    playCurrentSong();
-                } else{
+                } else {
+                    mCurrentSong = mSongs.get(GenerateRandomSongIndex());
+                }
+                setViews();
+                playCurrentSong();
+            }
+        });
+        mPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                if (!mShuffle) {
+                    if (mRepeatOne)
+                        playCurrentSong();
+                    else if (mRepeatAll) {
+                        if (mPlayIndex == mSongs.size() - 1)
+                            mPlayIndex = 0;
+                        else
+                            mPlayIndex++;
+                        mCurrentSong = mSongs.get(mPlayIndex);
+                        setViews();
+                        playCurrentSong();
+                    } else if (mPlayIndex != mSongs.size() - 1) {
+                        mPlayIndex++;
+                        mCurrentSong = mSongs.get(mPlayIndex);
+                        setViews();
+                        playCurrentSong();
+                    }
+                } else {
                     mCurrentSong = mSongs.get(GenerateRandomSongIndex());
                     setViews();
                     playCurrentSong();
                 }
-            }
-        });
-        mPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
-            @Override
-            public void onSeekComplete(MediaPlayer mp) {
-
             }
         });
         mMusicSeeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -204,9 +221,9 @@ public class PlayFragment extends Fragment {
 
     private int GenerateRandomSongIndex() {
         int randomIndex = new Random().nextInt(mSongs.size());
-        while (randomIndex==mPlayIndex)
+        while (randomIndex == mPlayIndex)
             randomIndex = new Random().nextInt(mSongs.size());
-            return randomIndex;
+        return randomIndex;
     }
 
     private void setViews() {
