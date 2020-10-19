@@ -1,5 +1,6 @@
 package com.example.myplayer.controller.fragment;
 
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.myplayer.R;
@@ -22,6 +24,7 @@ import com.example.myplayer.repository.MusicDBRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -100,72 +103,78 @@ public class PlayFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mShuffle = !mShuffle;
+                if (mShuffle)
+                    mShuffleButton.setBackgroundColor(getResources().
+                            getColor(R.color.silver, getContext().getTheme()));
+                else
+                    mShuffleButton.setBackgroundColor(getResources().
+                            getColor(R.color.grey, getContext().getTheme()));
             }
         });
         mRepeatOneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mRepeatOne) {
-                    mRepeatOne = false;
-                    mRepeatOneButton.setBackgroundColor(getResources().
-                            getColor(R.color.silver, null));
-                } else if (mRepeatAll) {
-                    mRepeatOne = true;
+                mRepeatOne = !mRepeatOne;
+                if (mRepeatOne && mRepeatAll) {
                     mRepeatAll = false;
                     mRepeatAllButton.setBackgroundColor(getResources().
-                            getColor(R.color.silver, null));
+                            getColor(R.color.silver, getContext().getTheme()));
                     mRepeatOneButton.setBackgroundColor(getResources().
-                            getColor(R.color.grey, null));
-                } else {
-                    mRepeatOne = true;
+                            getColor(R.color.grey, getContext().getTheme()));
+                } else if (!mRepeatOne)
                     mRepeatOneButton.setBackgroundColor(getResources().
-                            getColor(R.color.grey, null));
-                }
+                            getColor(R.color.silver, getContext().getTheme()));
             }
         });
         mRepeatAllButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mRepeatAll) {
-                    mRepeatAll = false;
-                    mRepeatAllButton.setBackgroundColor(getResources().
-                            getColor(R.color.silver, null));
-                } else if (mRepeatOne) {
-                    mRepeatAll = true;
+                mRepeatAll = !mRepeatAll;
+                if (mRepeatOne && mRepeatAll) {
                     mRepeatOne = false;
+                    mRepeatAllButton.setBackgroundColor(getResources().
+                            getColor(R.color.silver, getContext().getTheme()));
                     mRepeatOneButton.setBackgroundColor(getResources().
-                            getColor(R.color.silver, null));
-                    mRepeatAllButton.setBackgroundColor(getResources().
-                            getColor(R.color.grey, null));
-                } else {
-                    mRepeatAll = true;
-                    mRepeatAllButton.setBackgroundColor(getResources().
-                            getColor(R.color.grey, null));
-                }
+                            getColor(R.color.grey, getContext().getTheme()));
+                } else if (!mRepeatOne)
+                    mRepeatOneButton.setBackgroundColor(getResources().
+                            getColor(R.color.silver, getContext().getTheme()));
             }
         });
         mNextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mPlayIndex == mSongs.size() - 1)
-                    mPlayIndex = 0;
-                else
-                    mPlayIndex++;
-                mCurrentSong = mSongs.get(mPlayIndex);
-                setViews();
-                playCurrentSong();
+                if (!mShuffle) {
+                    if (mPlayIndex == mSongs.size() - 1)
+                        mPlayIndex = 0;
+                    else
+                        mPlayIndex++;
+                    mCurrentSong = mSongs.get(mPlayIndex);
+                    setViews();
+                    playCurrentSong();
+                } else{
+                    mCurrentSong = mSongs.get(GenerateRandomSongIndex());
+                    setViews();
+                    playCurrentSong();
+                }
             }
         });
         mPreviousButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mPlayIndex == 0)
-                    mPlayIndex = mSongs.size() - 1;
-                else
-                    mPlayIndex--;
-                mCurrentSong = mSongs.get(mPlayIndex);
-                setViews();
-                playCurrentSong();
+                if (!mShuffle) {
+                    if (mPlayIndex == 0)
+                        mPlayIndex = mSongs.size() - 1;
+                    else
+                        mPlayIndex--;
+                    mCurrentSong = mSongs.get(mPlayIndex);
+                    setViews();
+                    playCurrentSong();
+                } else{
+                    mCurrentSong = mSongs.get(GenerateRandomSongIndex());
+                    setViews();
+                    playCurrentSong();
+                }
             }
         });
         mPlayer.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
@@ -193,6 +202,13 @@ public class PlayFragment extends Fragment {
         });
     }
 
+    private int GenerateRandomSongIndex() {
+        int randomIndex = new Random().nextInt(mSongs.size());
+        while (randomIndex==mPlayIndex)
+            randomIndex = new Random().nextInt(mSongs.size());
+            return randomIndex;
+    }
+
     private void setViews() {
         mSongNameText.setText(mCurrentSong.getSongName());
         mArtistNameText.setText(mCurrentSong.getSongArtist());
@@ -205,7 +221,8 @@ public class PlayFragment extends Fragment {
             bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
             mAlbumArts.setImageBitmap(bitmap);
         } else
-            mAlbumArts.setImageDrawable(getResources().getDrawable(R.drawable.ic_album_art, null));
+            mAlbumArts.setImageDrawable(getResources().
+                    getDrawable(R.drawable.ic_album_art, getContext().getTheme()));
     }
 
     private void playCurrentSong() {
@@ -238,5 +255,4 @@ public class PlayFragment extends Fragment {
             }
         });
     }
-
 }
